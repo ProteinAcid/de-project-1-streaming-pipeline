@@ -1,0 +1,201 @@
+[0m04:08:26.457531 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fb9d80440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fbbd88910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fb88e7d90>]}
+
+
+============================== 04:08:26.461250 | 414c6c31-f664-49a1-a6a8-7e3e6fba3de8 ==============================
+[0m04:08:26.461250 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:08:26.461649 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'target_path': 'None', 'log_format': 'default', 'version_check': 'True', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'log_path': 'logs', 'indirect_selection': 'eager', 'no_print': 'None', 'cache_selected_only': 'False', 'partial_parse': 'True', 'static_parser': 'True', 'printer_width': '80', 'introspect': 'True', 'invocation_command': 'dbt init de_project_transform', 'debug': 'False', 'maximum_seed_size_mib': '1', 'fail_fast': 'False', 'profiles_dir': '/home/vedantwork/.dbt', 'use_experimental_parser': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'hints_enabled': 'True', 'empty': 'None', 'write_json': 'True', 'use_colors': 'True', 'log_cache_events': 'False'}
+[0m04:08:26.474644 [info ] [MainThread]: Creating dbt configuration folder at /home/vedantwork/.dbt
+[0m04:08:26.475957 [debug] [MainThread]: Starter project path: /home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/include/starter_project
+[0m04:08:26.479474 [info ] [MainThread]: Setting up your profile.
+[0m04:10:14.052587 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+
+[0m04:10:14.057290 [error] [MainThread]: Traceback (most recent call last):
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/cli/requires.py", line 190, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/cli/requires.py", line 136, in wrapper
+    return func(*args, **kwargs)
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/cli/main.py", line 503, in init
+    results = task.run()
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/task/init.py", line 360, in run
+    self.setup_profile(profile_name)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/task/init.py", line 264, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/task/init.py", line 181, in create_profile_from_target
+    self.create_profile_from_profile_template(profile_template, profile_name)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/task/init.py", line 165, in create_profile_from_profile_template
+    target = self.generate_target_from_input(prompts, initial_target)
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/task/init.py", line 131, in generate_target_from_input
+    target[key] = click.prompt(
+                  ~~~~~~~~~~~~^
+        text, default=default, hide_input=hide_input, type=type
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/click/termui.py", line 218, in prompt
+    value = prompt_func(prompt)
+  File "/home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/click/termui.py", line 201, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m04:10:14.060077 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 107.67765, "process_in_blocks": "69920", "process_kernel_time": 0.249357, "process_mem_max_rss": "124096", "process_out_blocks": "80", "process_user_time": 1.167625}
+[0m04:10:14.060583 [debug] [MainThread]: Command `dbt init` failed at 04:10:14.060476 after 107.68 seconds
+[0m04:10:14.061040 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fb87d62c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fb87db2f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x760fb7d508d0>]}
+[0m04:10:14.061433 [debug] [MainThread]: Flushing usage events
+[0m04:10:15.213532 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:10:27.634762 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e6444f6c440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e6446e94910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e6443ad3d90>]}
+
+
+============================== 04:10:27.637463 | b7eee3a8-e01d-4fb6-a5c4-a0b38d2128e7 ==============================
+[0m04:10:27.637463 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:10:27.637920 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'log_path': 'logs', 'use_experimental_parser': 'False', 'debug': 'False', 'hints_enabled': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'cache_selected_only': 'False', 'version_check': 'True', 'invocation_command': 'dbt init de_project_transform', 'empty': 'None', 'use_colors': 'True', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'introspect': 'True', 'partial_parse': 'True', 'maximum_seed_size_mib': '1', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'profiles_dir': '/home/vedantwork/.dbt', 'quiet': 'False', 'no_print': 'None', 'printer_width': '80'}
+[0m04:10:27.649338 [info ] [MainThread]: A project called de_project_transform already exists here.
+[0m04:10:27.650109 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.07059327, "process_in_blocks": "0", "process_kernel_time": 0.123881, "process_mem_max_rss": "119480", "process_out_blocks": "8", "process_user_time": 0.983057}
+[0m04:10:27.650411 [debug] [MainThread]: Command `dbt init` succeeded at 04:10:27.650346 after 0.07 seconds
+[0m04:10:27.650639 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e6443d06190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e6443994950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7e644395c050>]}
+[0m04:10:27.650891 [debug] [MainThread]: Flushing usage events
+[0m04:10:28.740049 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:12:02.461961 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cd8c70440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cdac90910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cd77d3d90>]}
+
+
+============================== 04:12:02.465045 | 8f17c43c-1f01-48f3-b5c3-43a5f952d074 ==============================
+[0m04:12:02.465045 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:12:02.465567 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt clean', 'quiet': 'False', 'partial_parse': 'True', 'fail_fast': 'False', 'log_format': 'default', 'use_experimental_parser': 'False', 'write_json': 'True', 'static_parser': 'True', 'maximum_seed_size_mib': '1', 'profiles_dir': '/home/vedantwork/.dbt', 'version_check': 'True', 'hints_enabled': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'use_colors': 'True', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'debug': 'False', 'empty': 'None', 'indirect_selection': 'eager', 'target_path': 'None', 'log_cache_events': 'False', 'log_path': 'logs', 'no_print': 'None', 'warn_error': 'None', 'introspect': 'True'}
+[0m04:12:02.466114 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /home/vedantwork/projects/DataEngg-Project-1/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m04:12:02.466954 [debug] [MainThread]: Resource report: {"command_name": "clean", "command_success": false, "command_wall_clock_time": 0.07646948, "process_in_blocks": "0", "process_kernel_time": 0.155213, "process_mem_max_rss": "119332", "process_out_blocks": "16", "process_user_time": 1.022818}
+[0m04:12:02.467406 [debug] [MainThread]: Command `dbt clean` failed at 04:12:02.467299 after 0.08 seconds
+[0m04:12:02.467654 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cd7a0a3f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cd7690290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785cd77f7240>]}
+[0m04:12:02.467933 [debug] [MainThread]: Flushing usage events
+[0m04:12:03.537221 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:12:22.776105 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a12e7c440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a14f40910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a119dfd90>]}
+
+
+============================== 04:12:22.778434 | 6949f211-354d-4554-857b-4b6118e4f1f5 ==============================
+[0m04:12:22.778434 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:12:22.778845 [debug] [MainThread]: running dbt with arguments {'use_experimental_parser': 'False', 'profiles_dir': '/home/vedantwork/.dbt', 'hints_enabled': 'True', 'printer_width': '80', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'debug': 'False', 'log_path': 'logs', 'warn_error': 'None', 'target_path': 'None', 'empty': 'None', 'write_json': 'True', 'log_cache_events': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'no_print': 'None', 'quiet': 'False', 'indirect_selection': 'eager', 'static_parser': 'True', 'cache_selected_only': 'False', 'introspect': 'True', 'log_format': 'default', 'use_colors': 'True', 'invocation_command': 'dbt init de_project_transform', 'maximum_seed_size_mib': '1', 'version_check': 'True', 'fail_fast': 'False'}
+[0m04:12:22.784926 [info ] [MainThread]: A project called de_project_transform already exists here.
+[0m04:12:22.785626 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.05883645, "process_in_blocks": "0", "process_kernel_time": 0.200626, "process_mem_max_rss": "119488", "process_out_blocks": "8", "process_user_time": 1.047271}
+[0m04:12:22.785916 [debug] [MainThread]: Command `dbt init` succeeded at 04:12:22.785853 after 0.06 seconds
+[0m04:12:22.786101 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a11c12190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a118a0950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x756a11868050>]}
+[0m04:12:22.786336 [debug] [MainThread]: Flushing usage events
+[0m04:12:23.907562 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:15:29.538874 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2b8c90440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2bac94a50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2b77f7d90>]}
+
+
+============================== 04:15:29.546696 | 68aed853-0393-4e84-ad21-81e411b1f86e ==============================
+[0m04:15:29.546696 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:15:29.548506 [debug] [MainThread]: running dbt with arguments {'introspect': 'True', 'use_colors': 'True', 'cache_selected_only': 'False', 'use_experimental_parser': 'False', 'fail_fast': 'False', 'invocation_command': 'dbt init de_project_transform', 'static_parser': 'True', 'partial_parse': 'True', 'quiet': 'False', 'maximum_seed_size_mib': '1', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'log_cache_events': 'False', 'warn_error': 'None', 'empty': 'None', 'indirect_selection': 'eager', 'profiles_dir': '/home/vedantwork/.dbt', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'no_print': 'None', 'log_path': 'logs', 'debug': 'False', 'version_check': 'True', 'hints_enabled': 'True', 'log_format': 'default', 'printer_width': '80'}
+[0m04:15:29.559603 [debug] [MainThread]: Starter project path: /home/vedantwork/projects/DataEngg-Project-1/venv/lib/python3.14/site-packages/dbt/include/starter_project
+[0m04:15:29.563864 [info ] [MainThread]: Setting up your profile.
+[0m04:18:14.890193 [info ] [MainThread]: Profile de_project_transform written to /home/vedantwork/.dbt/profiles.yml using target's profile_template.yml and your supplied values.
+[0m04:18:14.899732 [info ] [MainThread]: Running dbt debug to validate the project...
+[0m04:18:14.900536 [info ] [MainThread]: dbt version: 1.12.0
+[0m04:18:14.900802 [info ] [MainThread]: python version: 3.14.4
+[0m04:18:14.901001 [info ] [MainThread]: python path: /home/vedantwork/projects/DataEngg-Project-1/venv/bin/python3
+[0m04:18:14.901185 [info ] [MainThread]: os info: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+[0m04:18:14.936849 [info ] [MainThread]: Using profiles dir at /home/vedantwork/.dbt
+[0m04:18:14.937334 [info ] [MainThread]: Using profiles.yml file at /home/vedantwork/.dbt/profiles.yml
+[0m04:18:14.937621 [info ] [MainThread]: Using dbt_project.yml file at /home/vedantwork/projects/DataEngg-Project-1/de_project_transform/dbt_project.yml
+[0m04:18:14.939121 [info ] [MainThread]: adapter type: postgres
+[0m04:18:14.939920 [info ] [MainThread]: adapter version: 1.11.0
+[0m04:18:15.091509 [info ] [MainThread]: Configuration:
+[0m04:18:15.092624 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m04:18:15.093499 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m04:18:15.094054 [info ] [MainThread]: Required dependencies:
+[0m04:18:15.094438 [debug] [MainThread]: Executing "git --help"
+[0m04:18:15.110918 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m04:18:15.111656 [debug] [MainThread]: STDERR: "b''"
+[0m04:18:15.112409 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m04:18:15.112785 [info ] [MainThread]: Connection:
+[0m04:18:15.113109 [info ] [MainThread]:   host: localhost
+[0m04:18:15.113429 [info ] [MainThread]:   port: 5432
+[0m04:18:15.113777 [info ] [MainThread]:   user: vedant
+[0m04:18:15.114042 [info ] [MainThread]:   database: de_project
+[0m04:18:15.114247 [info ] [MainThread]:   schema: dbt_vedadnt
+[0m04:18:15.114442 [info ] [MainThread]:   connect_timeout: 10
+[0m04:18:15.114660 [info ] [MainThread]:   role: None
+[0m04:18:15.114836 [info ] [MainThread]:   search_path: None
+[0m04:18:15.114996 [info ] [MainThread]:   keepalives_idle: 0
+[0m04:18:15.115167 [info ] [MainThread]:   sslmode: None
+[0m04:18:15.115331 [info ] [MainThread]:   sslcert: None
+[0m04:18:15.115493 [info ] [MainThread]:   sslkey: None
+[0m04:18:15.115662 [info ] [MainThread]:   sslrootcert: None
+[0m04:18:15.115969 [info ] [MainThread]:   application_name: dbt
+[0m04:18:15.116213 [info ] [MainThread]:   autocommit: False
+[0m04:18:15.116408 [info ] [MainThread]:   retries: 1
+[0m04:18:15.116867 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m04:18:15.199796 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m04:18:15.238649 [debug] [MainThread]: Using postgres connection "debug"
+[0m04:18:15.239154 [debug] [MainThread]: On debug: select 1 as id
+[0m04:18:15.239517 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m04:18:15.248721 [debug] [MainThread]: Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+[0m04:18:15.249562 [debug] [MainThread]: Postgres adapter: Error running SQL: select 1 as id
+[0m04:18:15.249843 [debug] [MainThread]: Postgres adapter: Rolling back transaction.
+[0m04:18:15.250072 [debug] [MainThread]: On debug: No close available on handle
+[0m04:18:15.250546 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m04:18:15.251328 [info ] [MainThread]: [31m1 check failed:[0m
+[0m04:18:15.251778 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+  	Is the server running on that host and accepting TCP/IP connections?
+  
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m04:18:15.252338 [info ] [MainThread]: Your new dbt project "de_project_transform" was created!
+Initialized new project in /home/vedantwork/projects/DataEngg-Project-1/de_project_transform/de_project_transform
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m04:18:15.252783 [info ] [MainThread]: [31mYour profile may need adjustments. You can find the logs of `dbt debug` above[0m
+[0m04:18:15.254931 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 165.81454, "process_in_blocks": "8120", "process_kernel_time": 0.328357, "process_mem_max_rss": "133288", "process_out_blocks": "96", "process_user_time": 1.52566}
+[0m04:18:15.255446 [debug] [MainThread]: Command `dbt init` succeeded at 04:18:15.255336 after 165.82 seconds
+[0m04:18:15.255759 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m04:18:15.256086 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2b7a2a190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2b695bbf0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78a2b6d21bf0>]}
+[0m04:18:15.256460 [debug] [MainThread]: Flushing usage events
+[0m04:18:16.458925 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:57:10.929178 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c1f368440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c21390910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c1dd47890>]}
+
+
+============================== 04:57:10.937505 | 73c052ba-8449-4762-961e-7f877bf934fe ==============================
+[0m04:57:10.937505 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:57:10.938117 [debug] [MainThread]: running dbt with arguments {'debug': 'False', 'log_path': 'logs', 'log_format': 'default', 'send_anonymous_usage_stats': 'True', 'no_print': 'None', 'printer_width': '80', 'fail_fast': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_cache_events': 'False', 'use_experimental_parser': 'False', 'hints_enabled': 'True', 'write_json': 'True', 'target_path': 'None', 'cache_selected_only': 'False', 'invocation_command': 'dbt run', 'maximum_seed_size_mib': '1', 'partial_parse': 'True', 'use_colors': 'True', 'empty': 'False', 'quiet': 'False', 'static_parser': 'True', 'profiles_dir': '/home/vedantwork/.dbt', 'warn_error': 'None', 'introspect': 'True', 'version_check': 'True', 'indirect_selection': 'eager'}
+[0m04:57:10.938536 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /home/vedantwork/projects/DataEngg-Project-1/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m04:57:10.945728 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.117073335, "process_in_blocks": "60464", "process_kernel_time": 0.37471, "process_mem_max_rss": "119552", "process_out_blocks": "8", "process_user_time": 1.490226}
+[0m04:57:10.946343 [debug] [MainThread]: Command `dbt run` failed at 04:57:10.946220 after 0.12 seconds
+[0m04:57:10.946770 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c1e103ce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c1de00050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4c1dd988d0>]}
+[0m04:57:10.947206 [debug] [MainThread]: Flushing usage events
+[0m04:57:12.088808 [debug] [MainThread]: An error was encountered while trying to flush usage events
