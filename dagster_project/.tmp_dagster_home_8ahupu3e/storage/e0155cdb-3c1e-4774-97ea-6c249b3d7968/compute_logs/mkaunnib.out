@@ -1,0 +1,39 @@
+Running with dbt=1.11.12
+Registered adapter: postgres=1.11.0
+[[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.de_project_transform.example
+Found 3 models, 9 data tests, 1 source, 477 macros
+
+Concurrency: 4 threads (target='dev')
+
+1 of 12 START sql view model dbt_vedadnt.stg_orders ............................ [RUN]
+1 of 12 OK created sql view model dbt_vedadnt.stg_orders ....................... [[32mCREATE VIEW[0m in 0.42s]
+2 of 12 START test not_null_stg_orders_order_id ................................ [RUN]
+3 of 12 START test unique_stg_orders_order_id .................................. [RUN]
+2 of 12 PASS not_null_stg_orders_order_id ...................................... [[32mPASS[0m in 0.34s]
+3 of 12 PASS unique_stg_orders_order_id ........................................ [[32mPASS[0m in 0.35s]
+4 of 12 START sql view model dbt_vedadnt.dim_customers ......................... [RUN]
+4 of 12 OK created sql view model dbt_vedadnt.dim_customers .................... [[32mCREATE VIEW[0m in 0.42s]
+5 of 12 START test not_null_dim_customers_customer_id .......................... [RUN]
+6 of 12 START test not_null_dim_customers_customer_name ........................ [RUN]
+7 of 12 START test unique_dim_customers_customer_id ............................ [RUN]
+8 of 12 START test unique_dim_customers_customer_name .......................... [RUN]
+6 of 12 PASS not_null_dim_customers_customer_name .............................. [[32mPASS[0m in 0.22s]
+5 of 12 PASS not_null_dim_customers_customer_id ................................ [[32mPASS[0m in 0.25s]
+7 of 12 PASS unique_dim_customers_customer_id .................................. [[32mPASS[0m in 0.26s]
+8 of 12 PASS unique_dim_customers_customer_name ................................ [[32mPASS[0m in 0.26s]
+9 of 12 START sql view model dbt_vedadnt.fct_orders ............................ [RUN]
+9 of 12 OK created sql view model dbt_vedadnt.fct_orders ....................... [[32mCREATE VIEW[0m in 0.16s]
+10 of 12 START test not_null_fct_orders_customer_id ............................ [RUN]
+11 of 12 START test not_null_fct_orders_order_id ............................... [RUN]
+12 of 12 START test unique_fct_orders_order_id ................................. [RUN]
+10 of 12 PASS not_null_fct_orders_customer_id .................................. [[32mPASS[0m in 0.18s]
+12 of 12 PASS unique_fct_orders_order_id ....................................... [[32mPASS[0m in 0.19s]
+11 of 12 PASS not_null_fct_orders_order_id ..................................... [[32mPASS[0m in 0.21s]
+
+Finished running 9 data tests, 3 view models in 0 hours 0 minutes and 2.75 seconds (2.75s).
+
+[32mCompleted successfully[0m
+
+Done. PASS=12 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=12
