@@ -1,17 +1,30 @@
 from kafka import KafkaConsumer
 import psycopg2
 import json
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP", "localhost:9092")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "de_project")
+POSTGRES_USER = os.getenv("POSTGRES_USER", "vedant")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "localdev")
+
 conn = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    dbname="de_project",
-    user="vedant",
-    password="localdev"
+    host=POSTGRES_HOST,
+    port=POSTGRES_PORT,
+    dbname=POSTGRES_DB,
+    user=POSTGRES_USER,
+    password=POSTGRES_PASSWORD
 )
 cursor = conn.cursor()
 consumer = KafkaConsumer(
     'orders',
-    bootstrap_servers='localhost:9092',
+    bootstrap_servers=KAFKA_BOOTSTRAP,
     value_deserializer=lambda v: json.loads(v.decode('utf-8')),
     auto_offset_reset='earliest'
 )

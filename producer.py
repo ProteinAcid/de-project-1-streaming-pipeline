@@ -3,8 +3,16 @@ from faker import Faker
 import json
 import time
 import random
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP", "localhost:9092")
+
 producer = KafkaProducer(
-    bootstrap_servers='localhost:9092',
+    bootstrap_servers= KAFKA_BOOTSTRAP,
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 fake = Faker()

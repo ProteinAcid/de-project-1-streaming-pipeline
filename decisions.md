@@ -36,3 +36,36 @@
 **Why:** Automates data quality validation instead of manual spot-checking — catches broken joins or malformed data immediately (caught a real bug this way: an incorrect table alias in fct_orders that silently would've shipped a broken customer_id column if untested).
 
 **Bug caught during build:** fct_orders initially referenced `o.customer_id` (wrong table alias) instead of `c.customer_id` — dbt test failures on the fact table surfaced this immediately rather than it silently shipping broken data. Good real example of why testing matters.
+
+## Phase 4 — Orchestration (Dagster)
+
+**Decision:** Used Dagster over Airflow for orchestration
+**Why:** Asset-based mental model maps naturally onto an existing dbt project (models are already "assets"); lighter local setup than Airflow; growing real-world adoption; differentiates from the majority of portfolio projects that default to Airflow.
+
+**Decision:** Wrapped existing dbt project as Dagster assets via dagster-dbt integration
+**Why:** Avoids duplicating transformation logic in two places — Dagster orchestrates the existing dbt models directly rather than reimplementing them.
+
+**Major debugging incident:** Initial Dagster + dagster-dbt install failed with cascading dependency conflicts. Root cause: project's Python version (3.14) was too new — most current dagster-dbt releases require Python <3.14. Fixed by installing Python 3.12 via the deadsnakes PPA and rebuilding the virtual environment. Lesson: verify a tool's supported Python version range before adopting a brand-new Python release for a new project, especially with fast-moving/smaller ecosystem libraries.
+
+**Secondary issue:** DbtCliResource and DbtProject each independently need an explicit `profiles_dir` pointed at `~/.dbt` (where profiles.yml lives, outside the dbt project folder by dbt convention) — passing it to only one of the two objects still fails, since dbt-project-loading and dbt-CLI-execution are validated separately.
+
+**Decision:** Added a scheduled job (de_project_job) running via cron_schedule "0 2 * * *"
+**Why:** Automates the pipeline to run nightly without manual intervention — the actual point of orchestration versus manually clicking "Materialize." Chose 2 AM as a placeholder time simulating a typical "run after the day's data has landed" pattern real companies use.
+
+**Architecture note:** producer.py and consumer.py remain separate, continuously-running processes outside Dagster's scheduled orchestration, rather than being wrapped as Dagster assets. This is a deliberate choice: they represent an always-on streaming ingestion layer, while Dagster is used for scheduled batch transformation (dbt). Real systems commonly separate these concerns — a streaming ingestion layer and a batch orchestrator are different tools solving different problems, not one replacing the other.
+
+## Phase 6 — Containerization
+
+**Decision:** Containerized producer/consumer alongside existing Postgres/Redpanda services
+**Why:** Enables the entire ingestion stack to start with a single `docker-compose up` command — critical for reproducibility and for anyone (including an interviewer) to run the project without manual multi-step setup.
+
+**Decision:** Used environment variables (.env + python-dotenv) instead of hardcoded connection strings
+**Why:** Same code now works whether run directly via venv (localhost) or inside Docker (service names like `redpanda`/`postgres`) — addresses the hardcoded-credentials gap noted back in Phase 1.
+
+**Bug 1 — Docker networking:** Initial container-to-container connection failed because Redpanda's advertised address was still `localhost`, which inside a container refers to itself, not the Redpanda container. Fixed by configuring Redpanda with dual listeners — an internal `PLAINTEXT` listener advertised as `redpanda:9092` for other containers, and a separate `OUTSIDE` listener on port 19092 for host-machine access.
+
+**Bug 2 — dependency packaging:** `kafka-python==2.0.2` failed inside the container with a broken internal `six` import, even after explicitly installing `six`. Root cause was a known packaging issue in that specific release. Resolved by switching to `kafka-python-ng`, an actively maintained, API-compatible fork — required zero changes to actual application code.
+
+**Bug 3 — race condition on startup:** producer/consumer initially failed with `NoBrokersAvailable` because Docker's `depends_on` only waits for a container to *start*, not to be *ready* — Redpanda's container reported as started before it could actually accept client connections. Fixed by adding a proper Docker healthcheck (`rpk cluster health`) to the Redpanda service and updating `depends_on` to wait on `condition: service_healthy` rather than just container start.
+
+**Lesson:** Three genuinely different failure categories in one containerization pass — networking/addressing, dependency packaging, and startup ordering/race conditions. All three are common, real production issues, not beginner mistakes — good, legitimate debugging material for interviews.

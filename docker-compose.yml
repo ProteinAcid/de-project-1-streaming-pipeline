@@ -23,11 +23,42 @@ services:
       - --node-id
       - '0'
       - --kafka-addr
-      - PLAINTEXT://0.0.0.0:9092
+      - PLAINTEXT://0.0.0.0:9092,OUTSIDE://0.0.0.0:19092
       - --advertise-kafka-addr
-      - PLAINTEXT://localhost:9092
+      - PLAINTEXT://redpanda:9092,OUTSIDE://localhost:19092
     ports:
       - "9092:9092"
+      - "19092:19092"
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  producer:
+    build: .
+    command: python3 producer.py
+    environment:
+      KAFKA_BOOTSTRAP: redpanda:9092
+    depends_on:
+      redpanda:
+        condition: service_healthy
+
+  consumer:
+    build: .
+    command: python3 consumer.py
+    environment:
+      KAFKA_BOOTSTRAP: redpanda:9092
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: de_project
+      POSTGRES_USER: vedant
+      POSTGRES_PASSWORD: localdev
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      postgres:
+        condition: service_started
 
 volumes:
   pgdata:
