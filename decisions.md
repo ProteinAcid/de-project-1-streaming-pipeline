@@ -69,3 +69,10 @@
 **Bug 3 — race condition on startup:** producer/consumer initially failed with `NoBrokersAvailable` because Docker's `depends_on` only waits for a container to *start*, not to be *ready* — Redpanda's container reported as started before it could actually accept client connections. Fixed by adding a proper Docker healthcheck (`rpk cluster health`) to the Redpanda service and updating `depends_on` to wait on `condition: service_healthy` rather than just container start.
 
 **Lesson:** Three genuinely different failure categories in one containerization pass — networking/addressing, dependency packaging, and startup ordering/race conditions. All three are common, real production issues, not beginner mistakes — good, legitimate debugging material for interviews.
+
+## Phase 6 — Dashboard (Streamlit)
+
+**Decision:** Built dashboard using Streamlit + Plotly, reading directly from dbt marts (fct_orders, dim_customers)
+**Why:** Pure Python (no JS needed), free to deploy, and reads from the same trusted, tested transformation layer rather than querying raw data directly — dashboard reflects the same business logic used everywhere else in the pipeline.
+
+**Bug found via dashboard, not code review:** Initial dashboard revealed Total Orders == Unique Customers exactly, exposing that the producer's fake data generation didn't simulate repeat customers (a fresh random name was generated per order instead of sampling from a fixed customer pool). This is a good example of a data quality issue surfaced through downstream visualization rather than upstream testing — fixed by having the producer generate a fixed pool of 50 customer names once at startup and sample from it per order, better simulating realistic repeat-customer behavior.
