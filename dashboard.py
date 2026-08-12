@@ -9,11 +9,18 @@ load_dotenv()
 st.set_page_config(page_title="Order Analytics Dashboard", layout="wide")
 st.title("📦 E-Commerce Order Analytics")
 
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "de_project")
-POSTGRES_USER = os.getenv("POSTGRES_USER", "vedant")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "localdev")
+try:
+    POSTGRES_HOST = st.secrets["POSTGRES_HOST"]
+    POSTGRES_PORT = st.secrets["POSTGRES_PORT"]
+    POSTGRES_DB = st.secrets["POSTGRES_DB"]
+    POSTGRES_USER = st.secrets["POSTGRES_USER"]
+    POSTGRES_PASSWORD = st.secrets["POSTGRES_PASSWORD"]
+except (FileNotFoundError, KeyError):
+    POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+    POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
+    POSTGRES_DB = os.getenv("POSTGRES_DB", "de_project")
+    POSTGRES_USER = os.getenv("POSTGRES_USER", "vedant")
+    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "localdev")
 
 engine = create_engine(
     f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
