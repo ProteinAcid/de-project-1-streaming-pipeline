@@ -76,3 +76,12 @@
 **Why:** Pure Python (no JS needed), free to deploy, and reads from the same trusted, tested transformation layer rather than querying raw data directly — dashboard reflects the same business logic used everywhere else in the pipeline.
 
 **Bug found via dashboard, not code review:** Initial dashboard revealed Total Orders == Unique Customers exactly, exposing that the producer's fake data generation didn't simulate repeat customers (a fresh random name was generated per order instead of sampling from a fixed customer pool). This is a good example of a data quality issue surfaced through downstream visualization rather than upstream testing — fixed by having the producer generate a fixed pool of 50 customer names once at startup and sample from it per order, better simulating realistic repeat-customer behavior.
+
+## Phase 6 — Migration to Supabase (managed cloud Postgres)
+
+**Decision:** Migrated from local Docker Postgres to Supabase (managed cloud Postgres)
+**Why:** Enables a genuinely live, publicly deployable dashboard — Streamlit Cloud can't reach a database running on a local machine. Also more realistic: production systems point at managed databases, not developer laptops.
+
+**Bug 1 — DNS resolution failure:** Direct Supabase connection host failed inside Docker containers with "could not translate host name," due to the direct-connection hostname being IPv6-only in this environment, which Docker's default networking couldn't resolve. Fixed by switching to Supabase's Session Pooler connection (IPv4-compatible, different host/port, username format changes to `postgres.<project-ref>`).
+
+**Bug 2 — inconsistent secret escaping across tools:** The database password contained a `$` character, which has different special meanings depending on which tool reads it: Docker Compose requires `$$` to escape a literal `$` in both `.env` files and inline YAML values, while `python-dotenv` (used directly by Python scripts/dashboard) does NOT use this convention and reads `$` literally. Using the same escaped value in both places caused one tool to authenticate successfully while the other failed. Resolved by using single `$` in `.env` (read by python-dotenv) and `$$` only where Docker Compose parses the same secret inline in docker-compose.yml. Lesson: the same secret can require different escaping depending on the consuming tool — worth verifying per-tool rather than assuming one universal format.
